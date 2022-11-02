@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion : "2010-09-09"
 Resources : 
-  UsersByCloudFormation:
+  UsersByCloudFormationYaml:
     Type : AWS::DynamoDB::Table
     Properties : 
       AttributeDefinitions : 
@@ -17,7 +17,7 @@ Resources :
         -
           AttributeName : "Name"
           KeyType : "RANGE"
-      TableName : "UserByCloudFormation"
+      TableName : "UserByCloudFormationYaml"
       ProvisionedThroughput : 
         ReadCapacityUnits : "5"
         WriteCapacityUnits : "5"
