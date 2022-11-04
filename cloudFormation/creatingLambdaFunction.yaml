@@ -6,6 +6,7 @@ Resources:
     Properties:
       Runtime: python3.9
       Role: arn:aws:iam::167690867954:role/sistemas-Users
-      Handler: lambda_handler
-      Code: ../lambda/function_lambda_users.py 
+      Handler: lfunction_lambda_users.ambda_handler
+      Code:
+        CodeUri: ../lambda 
       Description: function
