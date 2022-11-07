@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion : "2010-09-09"
+Parameters:
+  NameForTable:
+    Type: String
+    Default: UserByCloudFormationYaml
+      
+Resources : 
+  SistemasUsersCL:
+      Type : AWS::DynamoDB::Table
+      Properties : 
+        AttributeDefinitions : 
+          -
+            AttributeName : "CPF"
+            AttributeType : "N"
+          -
+            AttributeName : "Name"
+            AttributeType : "S"
+        KeySchema :
+          -
+            AttributeName : "CPF"
+            KeyType : "HASH"
+          -
+            AttributeName : "Name"
+            KeyType : "RANGE"
+        TableName : SistemasUsersDyDB
+        ProvisionedThroughput : 
+          ReadCapacityUnits : "5"
+          WriteCapacityUnits : "5"
+
+  LambdaFunctionSistemasUsers:
+      Type: AWS::Lambda::Function
+      Properties:
+        Runtime: python3.9
+        Role: arn:aws:iam::167690867954:role/sistemas-Users
+        FunctionName: SistemasUsersLambdaFunction
+        Handler: index.lambda_handler
+        Code:
+          ZipFile: |
+            import json
+            import boto3
+            import os
+            def lambda_handler(event, context):
+              buidPut()
+              return {
+                  'statusCode': 200,
+                  'body': json.dumps('Hello from Lambda!')
+              }
+            def buidPut():
+              client:botocore.client.DynamoDB = boto3.client('dynamodb')
+              table = "SistemasUsersDyDB"
+              cpf = "30"
+              age = "17"
+              name = "marin kitagawa from cloud"
+              response = client.put_item(
+                    Item= {
+                      'CPF': {
+                          'N': cpf,
+                      },
+                      'Name': {
+                          'S': name,
+                      },
+                      'Age': {
+                          'N': age,
+                      },
+                  }, 
+                  TableName= table
+              )
+        Description: function
