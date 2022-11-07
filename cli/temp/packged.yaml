@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Lambda Function
+Resources:
+  LambdaFunctionSistemasUsers:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.9
+      Role: arn:aws:iam::167690867954:role/sistemas-Users
+      FunctionName: LambdaFunctionSistemasUsers
+      Handler: lambda_handler
+      Code:
+        ZipFile: "import json\nimport boto3\nimport os\ndef lambda_handler(event,\
+          \ context):\n  buidPut(event)\n  return {\n      'statusCode': 200,\n  \
+          \    'body': json.dumps('Hello from Lambda!')\n  }\ndef buidPut(event: dict):\n\
+          \  client:botocore.client.DynamoDB = boto3.client('dynamodb')\n  table =\
+          \ 'whizlabdemo'\n  id = 30\n  idade = 17\n  nome = \"marin from cloud\"\n\
+          \  response = client.put_item(\n        Item= {\n          'id': {\n   \
+          \           'S': id,\n          },\n          'Idade': {\n             \
+          \ 'S': idade,\n          },\n          'Name': {\n              'S': nome,\n\
+          \          },\n      }, \n      TableName= table\n  )\n"
+      Description: function
