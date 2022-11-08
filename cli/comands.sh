@@ -8,5 +8,7 @@ aws cloudformation package --template-file $script_dir/../cloudFormation/CLsiste
 
 aws cloudformation deploy --template-file $dir_output_file --stack-name sistemas-users-stack --region $AWS_REGION
 
+aws s3 cp $script_dir/../site $UrlBucketSite/ --recursive
+
 cat $dir_output_file
 rm -f $dir_output_file
