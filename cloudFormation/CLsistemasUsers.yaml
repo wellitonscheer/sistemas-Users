@@ -37,3 +37,19 @@ Resources :
         Handler: function_lambda_users.lambda_handler
         CodeUri: /home/caie/Projects/work/sistemas/users/lambda
         Description: function
+  s3StaticSite:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: static-site-sistemas-users
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+            AllowedOrigins:
+              - '*'
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
